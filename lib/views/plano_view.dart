@@ -20,6 +20,7 @@ class PlanoView extends StatefulWidget {
 class _PlanoViewState extends State<PlanoView> {
   final List<String> capasSeleccionadas = [];
 
+  // Función para cambiar el estado de las capas (para los botones tradicionales)
   void cambiarCapa(String capa) {
     setState(() {
       if (capasSeleccionadas.contains(capa)) {
@@ -30,6 +31,7 @@ class _PlanoViewState extends State<PlanoView> {
     });
   }
 
+  // Función para mostrar información de un objeto
   void mostrarInfo(String info, String id) {
     Navigator.pushNamed(
       context,
@@ -48,18 +50,53 @@ class _PlanoViewState extends State<PlanoView> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-
       body: Column(
         children: [
+          // Fila de botones: se incluye "Consumo Agua" como una capa más
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CapaButton('Soleria', 'soleria', const Color.fromARGB(255, 67, 177, 233), cambiarCapa, capasSeleccionadas),
-                CapaButton('Estructura', 'estructura', const Color.fromARGB(255, 124, 121, 120), cambiarCapa, capasSeleccionadas),
-                CapaButton('Fontaneria', 'fontaneria', Colors.purpleAccent, cambiarCapa, capasSeleccionadas),
-                CapaButton('Electricidad', 'electricidad', Colors.green, cambiarCapa, capasSeleccionadas),
+                // Botón "Consumo Agua" usando CapaButton con callback personalizado
+                CapaButton(
+                  'Consumo Agua',
+                  'consumo_agua',
+                  Colors.blue, // Puedes ajustar el color
+                  (layer) {
+                    Navigator.pushNamed(context, '/control_agua');
+                  },
+                  capasSeleccionadas,
+                ),
+                // Resto de botones de capas
+                CapaButton(
+                  'Soleria',
+                  'soleria',
+                  const Color.fromARGB(255, 67, 177, 233),
+                  cambiarCapa,
+                  capasSeleccionadas,
+                ),
+                CapaButton(
+                  'Estructura',
+                  'estructura',
+                  const Color.fromARGB(255, 124, 121, 120),
+                  cambiarCapa,
+                  capasSeleccionadas,
+                ),
+                CapaButton(
+                  'Fontaneria',
+                  'fontaneria',
+                  Colors.purpleAccent,
+                  cambiarCapa,
+                  capasSeleccionadas,
+                ),
+                CapaButton(
+                  'Electricidad',
+                  'electricidad',
+                  Colors.green,
+                  cambiarCapa,
+                  capasSeleccionadas,
+                ),
               ],
             ),
           ),
@@ -69,7 +106,7 @@ class _PlanoViewState extends State<PlanoView> {
               panEnabled: true,
               minScale: 0.5,
               maxScale: 4,
-              boundaryMargin: EdgeInsets.all(20),
+              boundaryMargin: const EdgeInsets.all(20),
               child: Center(
                 child: Transform.scale(
                   scale: 3.0,
@@ -93,7 +130,6 @@ class _PlanoViewState extends State<PlanoView> {
 
   List<Widget> _buildCapas() {
     List<Widget> widgets = [];
-
     if (capasSeleccionadas.contains('soleria')) {
       widgets.addAll(capa1Objetos.map((objeto) {
         return InteractiveShape(

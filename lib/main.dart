@@ -4,6 +4,7 @@ import 'views/plano_view.dart';
 import 'views/detalle_view.dart';
 import 'views/objeto_view.dart';
 import 'utils/app_theme.dart';
+import 'views/control_agua_view.dart';
 
 void main() {
   runApp(const ControlInstalacionesApp());
@@ -21,7 +22,14 @@ class ControlInstalacionesApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/':
+            // La nueva vista principal
             return MaterialPageRoute(builder: (_) => const HomeView());
+          case '/mantenimiento':
+            // Redirige a la HomeView con toda la funcionalidad actual
+            return MaterialPageRoute(builder: (_) => const HomeView());
+          case '/control_agua':
+            // Placeholder para la vista de Control Agua
+            return MaterialPageRoute(builder: (_) => const ControlAguaView());
           case '/plano':
             final args = settings.arguments as Map<String, dynamic>;
             return MaterialPageRoute(

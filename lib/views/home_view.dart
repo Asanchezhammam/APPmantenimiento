@@ -40,6 +40,13 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            // Redirige a la MainView (ruta raíz)
+            Navigator.pushReplacementNamed(context, '/');
+          },
+        ),
         title: const Text('CONTROL DE INSTALACIONES'),
         centerTitle: true,
       ),
@@ -70,29 +77,25 @@ class HomeView extends StatelessWidget {
                 DataColumn(
                   label: Text(
                     'Fecha',
-                    style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Tarea',
-                    style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Responsable',
-                    style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Okey',
-                    style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -120,9 +123,7 @@ class HomeView extends StatelessWidget {
                     DataCell(
                       Icon(
                         row['okey'] ? Icons.check : Icons.close,
-                        color: row['okey']
-                            ? Colors.green
-                            : Colors.red,
+                        color: row['okey'] ? Colors.green : Colors.red,
                         size: 28,
                       ),
                     ),
@@ -158,8 +159,7 @@ class _InstalacionButton {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        padding: const EdgeInsets.symmetric(
-            horizontal: 30, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
           side: const BorderSide(color: Colors.black87),
